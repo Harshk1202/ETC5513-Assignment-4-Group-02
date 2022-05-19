@@ -1,0 +1,21 @@
+---
+title: "ETC5513-Assignment-4-Group-02"
+author: "Harsh Katiyar"
+date: '2022-05-19'
+output: html_document
+---
+
+```{r}
+# Libraries
+library(tidyverse)
+library(readr)
+library(kableExtra)
+library(bookdown)
+
+```
+
+
+
+```{r}
+Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
+```
