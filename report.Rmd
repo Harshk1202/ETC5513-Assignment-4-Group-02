@@ -44,30 +44,6 @@ class: left, top
 
 ---
 
-class: center, middle
-
-# Section 4
-## Australia & Indonesia
-
-.pull-left[
-
-![](figs/australian-flag-small.jpeg)
-
-]
-
-.pull-right[
-
-![](figs/indonesian-flag-small.jpeg)
-
-]
-
-
-.tiny[
-source : [https://flaglane.com/](https://flaglane.com/)
-]
-
----
-
 class: left, top
 
 ### Section 4 Australia & Indonesia
@@ -78,8 +54,8 @@ au_idn <- Analysis_Data %>%
   rename(Country = "Entity", 
          avh = "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))",
          gdp = "Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))") %>%
-  select(country, Year, avh, gdp) %>%
-  filter(country %in% c("Australia", "Indonesia"), 
+  select(Country, Year, avh, gdp) %>%
+  filter(Country %in% c("Australia", "Indonesia"), 
          Year >=1970 & Year <=2017)
 ```
 
@@ -91,7 +67,9 @@ au_idn %>%
              color = Country)) +
   geom_line(show.legend = FALSE) +
     labs(x = "Year",
-         y = "Average annual hours worked by workers (hours)")
+         y = "hours",
+         title = "Average annual hours worked by workers from year 1970-2017") +
+  scale_y_continuous(labels = label_number(big.mark = ","))
   
 ```
 ]
@@ -104,7 +82,10 @@ au_idn %>%
              color = Country)) +
   geom_line()+
     labs(x = "Year",
-         y = "GDP per capita (USD)")
+         y = "USD",
+         title = "GDP per capita from year 1970-2017",
+         ) +
+  scale_y_continuous(labels = label_number(prefix="$", big.mark = ","))
   
 ```
 ]
