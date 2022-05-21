@@ -24,12 +24,23 @@ library(bookdown)
 Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
 ```
 
+class: left, top
+
+# CONTENTS
 
 
-class: center, middle
 
+1. Introduction (Repo Stucture & Research Question)
 
+2. Section 1 (China & US)
 
+3. Section 2 (Indua & UK)
+
+4. Section 3 (French & Italy)
+
+5. Section 4 (Australia & Indonesia)
+
+6. Conclusion
 
 ---
 
