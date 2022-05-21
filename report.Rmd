@@ -50,6 +50,42 @@ sec3_data <- Analysis_Data %>%
          Population = 'Population (historical estimates)')
 ```
 
+---
+class: left, middle
+```{r timechanges, echo = FALSE, warning=FALSE, message=FALSE, out.width = '80%', fig.height=4, fig.cap="The Development of Average Working Hours and GDP with the Year Changes"}
+sec3_figure <- sec3_data %>%
+  pivot_longer(cols = "Ave_working_hours":"GDP",
+               names_to = "type",
+               values_to = "workinghours_or_GDP") 
+
+  ggplot(sec3_figure) +
+  geom_line(aes(x = Year,
+                y = workinghours_or_GDP,
+                color = Country)) +
+  facet_wrap(~type, scales = "free_y")
+```
+
+- The left part figure shows that the average annual hours worked by persons are guadually decreased in both of two countries from the year of 1970 to 2017. 
+
+- The right part figure indicates that the overall trend of the output-side real GDP per capita  shows a continuous rise in the same period.
+
+---
+class: left, middle
+```{r relationship, echo = FALSE, warning=FALSE, message=FALSE, out.width='80%', fig.height=4, fig.cap="The Camparation between Average Working Hours and GDP"}
+ggplot(sec3_data) +
+    geom_line(aes(x = GDP,
+                  y = Ave_working_hours,
+                  color = Country)) 
+```
+
+- The Figure \@ref(fig:relationship) shows that the per capita working hours in France and Mexico show a declining trend as GDP increases.
+
+
+
+
+
+
+
 
 class: center, middle
 ![](https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif)
