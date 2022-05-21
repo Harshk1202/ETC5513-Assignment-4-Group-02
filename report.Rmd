@@ -44,6 +44,30 @@ class: left, top
 
 ---
 
+class: center, middle
+
+# Section 4
+## Australia & Indonesia
+
+.pull-left[
+
+![](figs/australian-flag-small.jpeg)
+
+]
+
+.pull-right[
+
+![](figs/indonesian-flag-small.jpeg)
+
+]
+
+
+.tiny[
+source : [https://flaglane.com/](https://flaglane.com/)
+]
+
+---
+
 
 ```{r endslide, child="EndSlide/endslide.Rmd"}
 ```  
