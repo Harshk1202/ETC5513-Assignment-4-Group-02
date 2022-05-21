@@ -91,19 +91,25 @@ au_idn %>%
 ]
 
 ---
-
 class: left, top
 
 ### Section 4 Australia & Indonesia
-##### Countries Background
+
 
 ```{r avg_avh_gdp, echo=FALSE}
 au_idn %>% 
     group_by(Country) %>%
     summarise(avg_avh = mean(avh),
-              avg_gdp = mean(gdp))
+              avg_gdp = mean(gdp)) %>%
+  kable(col.names = c("Country", 
+                      "Average of the Average Annual Working Hours (hours)", 
+                      "Average of GDP per capita (USD)"), 
+        digits = 2,
+        align = "lcr",
+        caption = "The Comparation of Average Annual Working Hours and GDP between Australia and Indonesia") %>%
+  kable_styling(full_width = F, 
+                bootstrap_options = c("striped", "hover", "condensed"))
 ```
-
 
 ---
 ```{r endslide, child="EndSlide/endslide.Rmd"}
