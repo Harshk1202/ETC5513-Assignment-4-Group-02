@@ -92,6 +92,20 @@ au_idn %>%
 
 ---
 
+class: left, top
+
+### Section 4 Australia & Indonesia
+##### Countries Background
+
+```{r avg_avh_gdp, echo=FALSE}
+au_idn %>% 
+    group_by(Country) %>%
+    summarise(avg_avh = mean(avh),
+              avg_gdp = mean(gdp))
+```
+
+
+---
 ```{r endslide, child="EndSlide/endslide.Rmd"}
 ```  
 
