@@ -24,6 +24,31 @@ library(bookdown)
 Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
 ```
 
+---
+class: center, middle
+# Section Three
+# France and Mexico
+
+---
+class: left, top
+# Country Background
+- .bold[France is a developed country]
+- .bold[Mexico is a developing country]
+
+# Stucture of this section
+- .bold[Observe the developing trend with the changes of working hours and GDP within each country]
+- .bold[Compare these two diffrent counties to calculate their average working time and GDP]
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+#process data
+sec3_data <- Analysis_Data %>%
+  filter(Entity %in% c("France", "Mexico"),
+         Year >= 1970) %>%
+  rename(Country = Entity,
+         Ave_working_hours = 'Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))',
+         GDP = 'Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))',
+         Population = 'Population (historical estimates)')
+```
 
 
 class: center, middle
@@ -36,7 +61,7 @@ class: center, middle
 
 Dr Patricia Menéndez
 ```{r out.width = '35%', echo = FALSE, fig.align="center"}
-knitr::include_graphics("figs/patricia.jpeg")
+
 ```
 
 Lecturer Department of Econometric and Business Statistics.
