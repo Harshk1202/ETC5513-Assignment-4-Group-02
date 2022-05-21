@@ -1,6 +1,11 @@
 ---
-title: "ETC5513-Assignment-4-Group-02"
-author: "Harsh Katiyar"
+title: "ETC5513-Assignment-4
+            Group-02
+          Presentation"
+author: "Harsh Katiyar,
+      Josephine Valencia,
+          Zhenyu Wu
+          Liwen Pan"
 date: '2022-05-19'
 output:
   xaringan::moon_reader:
@@ -9,7 +14,7 @@ output:
     yolo: FALSE
 ---
 
-```{r}
+```{r echo=FALSE, message=FALSE}
 # Libraries
 library(tidyverse)
 library(readr)
@@ -20,7 +25,7 @@ library(bookdown)
 
 
 
-```{r}
+```{r echo=FALSE, message=FALSE}
 Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
 ```
 
@@ -31,272 +36,60 @@ class: center, middle
 
 
 ---
-class: center, middle
-# Hello!
+class: center, top
 
-Dr Patricia Menéndez
-```{r out.width = '35%', echo = FALSE, fig.align="center"}
-knitr::include_graphics("figs/patricia.jpeg")
+# INDIA AND UNITED KINGDOM
+
+.content-box-soft[For .green[**India and United Kingdom**], GDP and Annual working hours data from 1970 to 2017, let's calcualate average of GDP and Working hours from 1970 to 2017]
+
+```{r echo=FALSE, message=FALSE}
+Ind_UK_Data <- Analysis_Data %>%
+    filter(Entity %in% c("India", "United Kingdom") & Year >= 1970 & Year <= 2017) %>%
+    rename(Country = "Entity",
+           Avg_Annual_Working_Hours = "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))", 
+           GDP = "Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))", 
+           Population = "Population (historical estimates)")
+
+Avg_GDP_WH <- Ind_UK_Data %>%
+    group_by(Country) %>%
+    summarise(avg_GDP = mean(GDP), avg_working_hrs = mean(Avg_Annual_Working_Hours))
+
+kable(Avg_GDP_WH, caption = "Average GDP and Working hours of India and United Kingdrom from 1970 to 2017", align = "c") %>%
+    kable_classic_2(full_width = F)
+    
+
 ```
 
-Lecturer Department of Econometric and Business Statistics.
-
-
-
-
-
----
-# Of course Yourselves too!
-
-![](figs/baim-hanif-pYWuOMhtc6k-unsplash.jpg)
-
-.tiny[<span>Photo by <a href="https://unsplash.com/@baim?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Baim Hanif</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>]
-
-
-
----
-class: left, top
-# This is an example of using boxes around txt
-.content-box-soft[ 
-- Understand the aims and structure of the unit
-]
-
-.content-box-duke-green[ 
-* Explain the need for reproducible and collaborative practices
-]
-.content-box-soft[ 
-* Introduce the main tools that we are going to use during the lectures/tutorials
-]
-
-
-
----
-class: left, top
-
-# Adding color to the text
-
-- .green[ This is an example in green]
-- .red[ This is an example in green]
-
-- .bold[This is an example in bold]
-
-- you can also use markdown bold syntax **bold**
-
-
+.content-box-duke-green[From the table on the previous slide, we see that despite India has more average working hours than United Kingdom, the average vale of GDP of United Kingdom is very high than India which means, for India and United Kingdom, GDP does not depend on Working hours solely, there are other factors as well.]
 
 ---
 class: center, top
 
-# Unit Structure
+.content-box-soft[To understand this, let's create a figure and see the trend in GDP and average working hours in India and United Kingdom.]
 
+```{r echo=FALSE, message=FALSE}
+p1 <- ggplot(Ind_UK_Data, aes(x = Year, 
+                        y = Avg_Annual_Working_Hours,
+                        color = Country)) + geom_line() +
+    ylab("Avg Work Hrs (Annual)") + labs(title = "Avg Work Hrs of India and UK from 1970 to 2017") + theme_bw()
 
 
-.pull-left[
-* Start with individual projects 
-.tiny[<span>Photo by <a href="https://unsplash.com/@firmbee?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">William Iven</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>]
-]
-.pull-left[
-```{r out.width = '50%', echo = FALSE}
-knitr::include_graphics("figs/william-iven-gcsNOsPEXfs-unsplash.jpg")
-```
 
-]
+p2 <- ggplot(Ind_UK_Data, aes(x = Year, 
+                        y = GDP,
+                        color = Country)) + geom_line() + 
+    labs(title = "GDP each year of India and UK from 1970 to 2017") + theme_bw()
 
-.pull-left[
- * Will continue with group projects
- 
- .tiny[<span>Photo by <a href="https://unsplash.com/@homajob?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Scott Graham</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>]
 
-]
-.pull-left[
-```{r out.width = '50%', echo = FALSE}
-knitr::include_graphics("figs/helloquence-5fNmWej4tAA-unsplash.jpg")
-```
-
-
-]
-
-.pull-left[
- * Finally, as a class, we will produce a join project
- 
- .tiny[<span>Photo by <a href="https://unsplash.com/@baim?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Baim Hanif</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>]
-]
-.pull-left[
-```{r out.width = '50%', echo = FALSE}
-knitr::include_graphics("figs/baim-hanif-pYWuOMhtc6k-unsplash.jpg")
-```
-
-]
-
-
-
-
-
-
-
----
-class: left, middle
-# Different headings
-.green[.bold[Example]] 
-### Smaller heading
-* My section
-
-### Another samller heading
-.content-box-duke-green[ 
-
-  - You will get instructions with the tasks that need to be completed during the tutorial.
-  - Fan and Naveen will be there to guide and help you through the activities.
-  - Tutorials also provide a good opportunity for you to discuss and work with your peers.
-]
-
-
----
-
-class: left, middle
-# Using also LaTex
-
-.content-box-soft[ 
-- .green[.bold[Patricia]] $\leftarrow$ hello hello ]
-
-- $\sum_{i = 1}^{\infty} x_i$
-
-**Bolding using markdown**
-
----
-class: centre, middle
-# Questions?
-
-
-
----
-class:  center, top
-
-# Let's get started with gifs
-
-
-![](https://media.giphy.com/media/3ohc1fpw7snh6omAaQ/giphy.gif)
-
-
-
-
-
----
-class: left, top
-
-# Adding code
-
-```{r }
-c(1:10)
-
-```
-
-
----
-class: left, top
-# Adding code
-
-```{r }
-penguins %>%
-  dplyr::select(body_mass_g,
-                ends_with("_mm")
-                ) %>%
-  glimpse()
-```
-
-
-
-
----
-class:  left, top
-# Adding figure
-
-.pull-left1[
-```{r  penguins , eval = FALSE, warning = FALSE, message = FALSE}
-ggplot(data = penguins, 
-       aes(x = flipper_length_mm,
-           y = body_mass_g)) +
-  geom_point(aes(color = species,
-                 shape = species),
-             size = 2) +
-  scale_color_manual(
-    values = c("darkorange",
-               "darkorchid",
-               "cyan4"))
-
-```
-]
-
-
-.pull-right1[
-```{r  penguins2 , eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
-ggplot(data = penguins,
-       aes(x = flipper_length_mm,
-           y = body_mass_g)) +
-  geom_point(aes(color = species,
-                 shape = species),
-             size = 2) +
-  scale_color_manual(
-    values = c("darkorange",
-               "darkorchid",
-               "cyan4"))
-
-```
-]
-
-
-
----
-class:  left, top
-# Adding figure --> another way
-
-.right-column[
-```{r  penguins3 , eval = FALSE, warning = FALSE, message = FALSE}
-ggplot(data = penguins, 
-       aes(x = flipper_length_mm,
-           y = body_mass_g)) +
-  geom_point(aes(color = species,
-                 shape = species),
-             size = 2) +
-  scale_color_manual(
-    values = c("darkorange",
-               "darkorchid",
-               "cyan4"))
-
-```
-]
-
-
-.left-column[
-```{r  penguins4 , eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
-ggplot(data = penguins,
-       aes(x = flipper_length_mm,
-           y = body_mass_g)) +
-  geom_point(aes(color = species,
-                 shape = species),
-             size = 2) +
-  scale_color_manual(
-    values = c("darkorange",
-               "darkorchid",
-               "cyan4"))
-
-```
-]
-
-
----
-# Tables
-
-
-```{r}
-iris2 <- head(iris)
-knitr::kable(iris2,
-             col.names = gsub("[.]", " ",
-                              names(iris)))
-
+gridExtra::grid.arrange(p1,p2, nrow=2)
 ```
 
 ---
+class: center, top
 
-```{r endslide, child="EndSlide/endslide.Rmd"}
-```  
+.content-box-soft[From the above plots, it is clear that in India, the Average working hours and GDP both are increasing but not as compared to UK. On the other hand, in UK, Average working hours are decreasing continuously while GDP is going up. Therefore, GDP does not solely depend on working hours. In India, the population has increased to a great extent and in UK, the increase has not been that much, therefore this huge increase in population might have been the reason for India's falling short in GDP growth.]
+
+---
+
+
 
