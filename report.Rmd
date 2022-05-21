@@ -105,6 +105,15 @@ kable(sec3_table, booktabs = TRUE, caption = "The Comparation of Average Working
 * Working hours tend to decrease as countries become richer.
 ]
 
+---
+class: left, top
+# Reference
+
+Ibarra, Carlos A, & Ros, Jaime. (2019). The decline of the labor income share in Mexico, 1990–2015. World Development, 122, 570–584. https://doi.org/10.1016/j.worlddev.2019.06.014
+
+Haller, Alina-Petronela. (2017). Growth Through Tourism in Developed European Countries. Case Study: France, Italy and Spain. EcoForum (Suceava.), 6(1), 0–0.
+
+Charlie Giattino & Esteban Ortiz-Ospina. (2020). Do workers in richer countries work longer hours? Our World in Data. Retrived from:  https://ourworldindata.org/rich-poor-working-hours
 
 
 
