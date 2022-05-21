@@ -80,6 +80,21 @@ ggplot(sec3_data) +
 
 - The Figure \@ref(fig:relationship) shows that the per capita working hours in France and Mexico show a declining trend as GDP increases.
 
+---
+class: left, middle
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+sec3_table <- sec3_data %>%
+  group_by(Country) %>%
+  summarise(Working_hours = round(mean(Ave_working_hours, na.rm = TRUE),0),
+            GDP = round(mean(GDP, na.rm = TRUE),0))
+```
+
+```{r comparation, echo = FALSE, warning=FALSE, message=FALSE, fig.align = 'center', out.width='80%', fig.height=6}
+kable(sec3_table, booktabs = TRUE, caption = "The Comparation of Average Working Hours and GDP between France and Mexico")
+``` 
+
+- It can be found from the table that the France has a lower working hours and a higher GDP compared with Mexico with 1,640 hours and 26,998 dollors respectively. And people in Mexico work around 2,297 hours and GDP per capita is around 12,339 dollors.
+
 
 
 
