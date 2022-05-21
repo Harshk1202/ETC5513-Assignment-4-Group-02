@@ -9,7 +9,7 @@ output:
     yolo: FALSE
 ---
 
-```{r echo=FALSE, message=FALSE, error=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Libraries
 library(tidyverse)
 library(readr)
@@ -20,7 +20,7 @@ library(bookdown)
 
 
 
-```{r read_data, echo=FALSE, message=FALSE}
+```{r read_data, echo=FALSE, message=FALSE, warning=FALSE}
 Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
 ```
 
