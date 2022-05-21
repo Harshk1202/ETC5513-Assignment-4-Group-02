@@ -118,7 +118,6 @@ class: left, top
 
 ### Section 4 Australia & Indonesia
 
-
 ```{r avg_avh_gdp, echo=FALSE}
 au_idn %>% 
     group_by(Country) %>%
@@ -133,8 +132,14 @@ au_idn %>%
   kable_styling(full_width = F, 
                 bootstrap_options = c("striped", "hover", "condensed"))
 ```
+
+.content-box-duke-green[ 
+ ** Less working hours resulted in higher GDP **
 ]
+
 ---
+
+
 ```{r endslide, child="EndSlide/endslide.Rmd"}
 ```  
 
