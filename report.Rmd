@@ -122,6 +122,7 @@ kable(sec3_table, booktabs = TRUE, caption = "The Comparation of Average Working
 .content-box-duke-green[ 
 * While average earnings have risen, hours worked have fallen. 
 ]
+
 .content-box-duke-green[ 
 * Working hours tend to decrease as countries become richer.
 ]
