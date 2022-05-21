@@ -95,6 +95,16 @@ kable(sec3_table, booktabs = TRUE, caption = "The Comparation of Average Working
 
 - It can be found from the table that the France has a lower working hours and a higher GDP compared with Mexico with 1,640 hours and 26,998 dollors respectively. And people in Mexico work around 2,297 hours and GDP per capita is around 12,339 dollors.
 
+---
+# Conclusion (France & Mexico)
+
+.content-box-duke-green[ 
+* While average earnings have risen, hours worked have fallen. 
+]
+.content-box-duke-green[ 
+* Working hours tend to decrease as countries become richer.
+]
+
 
 
 
