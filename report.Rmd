@@ -23,11 +23,32 @@ library(bookdown)
 ```{r}
 Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
 ```
+---
+class: center, middle
+# Introduction
+## Repo Stucture & Research Question
+---
+class: center, top
+# Repo Stucture
+```{r out.width = '80%', echo = FALSE, fig.align="center"}
+knitr::include_graphics("figs/ ... .jpeg")
+```
+
+---
+class: left, top
+# Research Question
+.content-box-duke-green[ 
+* How do the average annual hours worked relates to the GDP in different countries from the year of 1970 to 2017?
+]
+
+.content-box-soft[ 
+- Workers in rich countries tend to be shorter than workers in poor countries. Because in richer countries, workers per hour production capacity is higher, which means that people there have the higher income and less working hours. Therefore, the dramatic differences between different countries working time on how we look at the past two centuries of economic progress and the essence of the inequality between countries today has an important impact.
+]
 
 ---
 class: center, middle
 # Section Three
-# France and Mexico
+# France & Mexico
 
 ---
 class: left, top
@@ -89,7 +110,7 @@ sec3_table <- sec3_data %>%
             GDP = round(mean(GDP, na.rm = TRUE),0))
 ```
 
-```{r comparation, echo = FALSE, warning=FALSE, message=FALSE, fig.align = 'center', out.width='80%', fig.height=6}
+```{r comparation, echo = FALSE, warning=FALSE, message=FALSE, fig.align="center", out.width='80%', fig.height=6}
 kable(sec3_table, booktabs = TRUE, caption = "The Comparation of Average Working Hours and GDP between France and Mexico")
 ``` 
 
@@ -114,6 +135,7 @@ Ibarra, Carlos A, & Ros, Jaime. (2019). The decline of the labor income share in
 Haller, Alina-Petronela. (2017). Growth Through Tourism in Developed European Countries. Case Study: France, Italy and Spain. EcoForum (Suceava.), 6(1), 0–0.
 
 Charlie Giattino & Esteban Ortiz-Ospina. (2020). Do workers in richer countries work longer hours? Our World in Data. Retrived from:  https://ourworldindata.org/rich-poor-working-hours
+
 
 
 
