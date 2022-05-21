@@ -92,7 +92,8 @@ au_idn %>%
     labs(x = "Year",
          y = "hours",
          title = "Average annual hours worked by workers from year 1970-2017") +
-  scale_y_continuous(labels = label_number(big.mark = ","))
+  scale_y_continuous(labels = label_number(big.mark = ",")) +
+  theme_linedraw() 
   
 ```
 ]
@@ -108,7 +109,8 @@ au_idn %>%
          y = "USD",
          title = "GDP per capita from year 1970-2017",
          ) +
-  scale_y_continuous(labels = label_number(prefix="$", big.mark = ","))
+  scale_y_continuous(labels = label_number(prefix="$", big.mark = ",")) +
+  theme_linedraw() 
   
 ```
 ]
