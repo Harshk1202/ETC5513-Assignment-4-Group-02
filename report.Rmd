@@ -44,10 +44,33 @@ class: left, top
 
 ---
 
+
+class: center, middle
+
+# Section 4
+## Australia & Indonesia
+
+.pull-left[
+
+![](figs/australian-flag-small.jpeg)
+
+]
+
+.pull-right[
+
+![](figs/indonesian-flag-small.jpeg)
+
+]
+
+.tiny[
+source : [https://flaglane.com/](https://flaglane.com/)
+]
+
+---
+
 class: left, top
 
 ### Section 4 Australia & Indonesia
-##### Countries Background
 
 ```{r au_idn, echo=FALSE}
 au_idn <- Analysis_Data %>%
@@ -110,7 +133,7 @@ au_idn %>%
   kable_styling(full_width = F, 
                 bootstrap_options = c("striped", "hover", "condensed"))
 ```
-
+]
 ---
 ```{r endslide, child="EndSlide/endslide.Rmd"}
 ```  
