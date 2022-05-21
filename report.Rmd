@@ -68,6 +68,48 @@ source : [https://flaglane.com/](https://flaglane.com/)
 
 ---
 
+class: left, top
+
+### Section 4 Australia & Indonesia
+##### Countries Background
+
+```{r au_idn, echo=FALSE}
+au_idn <- Analysis_Data %>%
+  rename(Country = "Entity", 
+         avh = "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))",
+         gdp = "Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))") %>%
+  select(country, Year, avh, gdp) %>%
+  filter(country %in% c("Australia", "Indonesia"), 
+         Year >=1970 & Year <=2017)
+```
+
+.pull-left[
+```{r avh, echo=FALSE}
+au_idn %>% 
+  ggplot(aes(x = Year, 
+             y = avh, 
+             color = Country)) +
+  geom_line(show.legend = FALSE) +
+    labs(x = "Year",
+         y = "Average annual hours worked by workers (hours)")
+  
+```
+]
+
+.pull-right[
+```{r gdp, echo=FALSE}
+au_idn %>% 
+  ggplot(aes(x = Year, 
+             y = gdp, 
+             color = Country)) +
+  geom_line()+
+    labs(x = "Year",
+         y = "GDP per capita (USD)")
+  
+```
+]
+
+---
 
 ```{r endslide, child="EndSlide/endslide.Rmd"}
 ```  
