@@ -1,28 +1,14 @@
 ---
-
-title: "ETC5513-Assignment-4
-            Group-02
-          Presentation"
-author: "Harsh Katiyar,
-      Josephine Valencia,
-          Zhenyu Wu
-          Liwen Pan"
-date: '2022-05-19'
-
-title: ""
-subtitle: ""
-author: ""
-institute: ""
+title: "Analysis of Average Working Hours and GDP around the world from 1970 - 2017"
+author: "GROUP 02 (Zhenyu Wu - Harsh Katiyar - Liwen Pan - Josephine Valensia)"
+date: '2022-05-24'
 output:
   xaringan::moon_reader:
     lib_dir: libs
     yolo: FALSE
 ---
 
-```{r echo=FALSE, message=FALSE}
-
-```{r , echo = FALSE, message = FALSE, warning = FALSE}
-
+```{r echo = FALSE, message = FALSE, warning = FALSE}
 # Libraries
 
 library(tidyverse)
@@ -30,21 +16,39 @@ library(readr)
 library(kableExtra)
 library(bookdown)
 library(DT)
+library(scales)
 ```
 
 
-
-
-```{r echo=FALSE, message=FALSE}
-
-```{r , echo = FALSE, message = FALSE, warning = FALSE}
+```{r echo = FALSE, message = FALSE, warning = FALSE}
 options(scipen = 200)
 Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
 ```
 ---
+
+class: left, top
+
+# CONTENTS
+
+
+1. Introduction (Repo Structure & Research Question)
+
+2. Section 1 (China & US)
+
+3. Section 2 (India & UK)
+
+4. Section 3 (France & Mexico)
+
+5. Section 4 (Australia & Indonesia)
+
+6. Conclusion
+
+---
+
 class: center, middle
 # Introduction
 ## Repo Stucture & Research Question
+
 ---
 class: center, top
 # Repo Stucture
@@ -62,6 +66,165 @@ class: left, top
 .content-box-soft[ 
 - Workers in rich countries tend to be shorter than workers in poor countries. Because in richer countries, workers per hour production capacity is higher, which means that people there have the higher income and less working hours. Therefore, the dramatic differences between different countries working time on how we look at the past two centuries of economic progress and the essence of the inequality between countries today has an important impact.
 ]
+
+---
+
+```{r , echo = FALSE, message = FALSE, warning = FALSE}
+data <- Analysis_Data %>%
+  filter(Entity %in% c("China","United States")) %>%
+  filter(Year>=1970 & Year<=2017) 
+
+data <- data %>%
+  rename(Average.annual.hours.worked =
+        "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))",
+        GDP.per.capita="Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))",
+        Population="Population (historical estimates)",
+        Country=Entity) 
+
+two_decimal <- function(x) round(x,2)
+
+ overall <- data %>%
+    group_by(Country) %>%
+    summarise_at(c("Average.annual.hours.worked","GDP.per.capita","Population"),
+                 list(Minimum = ~min(.,na.rm=TRUE), 
+                      Median = ~median(.,na.rm=TRUE), 
+                      Mean = ~mean(.,na.rm=TRUE))) %>%
+    mutate_if(is.numeric,two_decimal) %>% 
+    pivot_longer(!Country, names_sep ="_",
+                 names_to = c("Variable", ".value"))%>%
+   mutate(Variable=ifelse(Variable=="Average.annual.hours.worked",
+                          "Hours.worked",Variable))
+
+W1 <-ggplot(data,mapping = aes(x = Year,y=GDP.per.capita,
+                           color=Country,group=Country)) +
+  geom_line() +
+  labs(y ="GDP per capita", 
+       caption = "Source: World Bank data base")+
+    theme_bw()
+
+W2 <-ggplot(data,mapping = aes(x = Year,y=Average.annual.hours.worked,
+                           color=Country,group=Country)) +
+  geom_line() +
+  labs(y ="Average annual hours worked", 
+       caption = "Source: World Bank data base")+
+    theme_bw()
+
+W3 <- data %>%
+    filter(Country=="United States")%>%
+    ggplot(mapping = aes(x = Average.annual.hours.worked,
+                          y=GDP.per.capita))+
+    geom_point() + 
+    stat_smooth(method=lm)+
+  labs(x ="Average annual hours worked", 
+       y ="GDP per capita", 
+       caption = "Source: World Bank data base")+
+    theme_bw()
+```
+
+---
+
+## Interested Country: China and The United States
+
+<br>
+<br>
+--
+**Q1: How do the Average annual hours worked relates to the GDP between China and The United States
+<br>
+<br>
+--
+**Q2: What is the trend of GDP between China and The United States
+
+---
+
+## Descriptive statistical analysis of China and The United States
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+datatable(overall)
+
+```
+
+---
+
+## GDP per capita between China and The United States.
+
+```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
+knitr::include_graphics("figs/Rplot.png")
+```
+
+---
+## Average annual work hours between China and The United States.
+
+```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
+knitr::include_graphics("figs/Rplot01.png")
+```
+
+---
+## The relation between Average annual hours worked and GDP per capita in The United States
+```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
+knitr::include_graphics("figs/Rplot02.png")
+```
+---
+## The relation between Average annual hours worked and GDP per capita in China
+```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
+knitr::include_graphics("figs/Rplot03.png")
+```
+
+---
+class: center, top
+
+# INDIA AND UNITED KINGDOM
+
+.content-box-soft[For **India and United Kingdom**, GDP and Annual working hours data from 1970 to 2017, lets calculate average of GDP and Working hours from 1970 to 2017]
+
+
+```{r echo=FALSE, message=FALSE}
+Ind_UK_Data <- Analysis_Data %>%
+    filter(Entity %in% c("India", "United Kingdom") & Year >= 1970 & Year <= 2017) %>%
+    rename(Country = "Entity",
+           Avg_Annual_Working_Hours = "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))", 
+           GDP = "Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))", 
+           Population = "Population (historical estimates)")
+
+Avg_GDP_WH <- Ind_UK_Data %>%
+    group_by(Country) %>%
+    summarise(avg_GDP = mean(GDP), avg_working_hrs = mean(Avg_Annual_Working_Hours))
+
+kable(Avg_GDP_WH, caption = "Average GDP and Working hours of India and United Kingdrom from 1970 to 2017", align = "c") %>%
+    kable_classic_2(full_width = F)
+```
+
+
+.content-box-duke-green[From the table on the previous slide, we see that despite India has more average working hours than United Kingdom, the average vale of GDP of United Kingdom is very high than India which means, for India and United Kingdom, GDP does not depend on Working hours solely, there are other factors as well.]
+
+---
+class: center, top
+
+.content-box-soft[To understand this, let's create a figure and see the trend in GDP and average working hours in India and United Kingdom.]
+
+```{r echo=FALSE, message=FALSE}
+p1 <- ggplot(Ind_UK_Data, aes(x = Year, 
+                        y = Avg_Annual_Working_Hours,
+                        color = Country)) + geom_line() +
+    ylab("Avg Work Hrs (Annual)") + labs(title = "Avg Work Hrs of India and UK from 1970 to 2017") + theme_bw()
+
+
+
+p2 <- ggplot(Ind_UK_Data, aes(x = Year, 
+                        y = GDP,
+                        color = Country)) + geom_line() + 
+    labs(title = "GDP each year of India and UK from 1970 to 2017") + theme_bw()
+
+
+gridExtra::grid.arrange(p1,p2, nrow=2)
+
+```
+
+---
+
+class: center, top
+
+.content-box-soft[From the above plots, it is clear that in India, the Average working hours and GDP both are increasing but not as compared to UK. On the other hand, in UK, Average working hours are decreasing continuously while GDP is going up. Therefore, GDP does not solely depend on working hours. In India, the population has increased to a great extent and in UK, the increase has not been that much, therefore this huge increase in population might have been the reason for India's falling short in GDP growth.]
+
 
 ---
 class: center, middle
@@ -146,182 +309,109 @@ kable(sec3_table, booktabs = TRUE, caption = "The Comparation of Average Working
 ]
 
 ---
+
+class: center, middle
+
+# Section 4
+## Australia & Indonesia
+
+.pull-left[
+
+![](figs/australian-flag-small.jpeg)
+
+]
+
+.pull-right[
+
+![](figs/indonesian-flag-small.jpeg)
+
+]
+
+.tiny[
+source : [https://flaglane.com/](https://flaglane.com/)
+]
+
+---
+
 class: left, top
-# Reference
 
-Ibarra, Carlos A, & Ros, Jaime. (2019). The decline of the labor income share in Mexico, 1990–2015. World Development, 122, 570–584. https://doi.org/10.1016/j.worlddev.2019.06.014
+### Section 4 Australia & Indonesia
 
-Haller, Alina-Petronela. (2017). Growth Through Tourism in Developed European Countries. Case Study: France, Italy and Spain. EcoForum (Suceava.), 6(1), 0–0.
+```{r au_idn, echo=FALSE}
+au_idn <- Analysis_Data %>%
+  rename(Country = "Entity", 
+         avh = "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))",
+         gdp = "Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))") %>%
+  select(Country, Year, avh, gdp) %>%
+  filter(Country %in% c("Australia", "Indonesia"), 
+         Year >=1970 & Year <=2017)
+```
 
-Charlie Giattino & Esteban Ortiz-Ospina. (2020). Do workers in richer countries work longer hours? Our World in Data. Retrived from:  https://ourworldindata.org/rich-poor-working-hours
 
+.pull-left[
+```{r avh, echo=FALSE}
+au_idn %>% 
+  ggplot(aes(x = Year, 
+             y = avh, 
+             color = Country)) +
+  geom_line(show.legend = FALSE) +
+    labs(x = "Year",
+         y = "hours",
+         title = "Average annual hours worked by workers from year 1970-2017") +
+  scale_y_continuous(labels = label_number(big.mark = ",")) +
+  theme_linedraw() 
+  
+```
+]
 
+.pull-right[
+```{r gdp, echo=FALSE}
+au_idn %>% 
+  ggplot(aes(x = Year, 
+             y = gdp, 
+             color = Country)) +
+  geom_line()+
+    labs(x = "Year",
+         y = "USD",
+         title = "GDP per capita from year 1970-2017",
+         ) +
+  scale_y_continuous(labels = label_number(prefix="$", big.mark = ",")) +
+  theme_linedraw() 
+  
+```
+]
 
+---
+class: left, top
 
-```{r , echo = FALSE, message = FALSE, warning = FALSE}
-data <- Analysis_Data %>%
-  filter(Entity %in% c("China","United States")) %>%
-  filter(Year>=1970 & Year<=2017) 
+### Section 4 Australia & Indonesia
 
-data <- data %>%
-  rename(Average.annual.hours.worked =
-        "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))",
-        GDP.per.capita="Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))",
-        Population="Population (historical estimates)",
-        Country=Entity) 
-
-two_decimal <- function(x) round(x,2)
-
- overall <- data %>%
+```{r avg_avh_gdp, echo=FALSE}
+au_idn %>% 
     group_by(Country) %>%
-    summarise_at(c("Average.annual.hours.worked","GDP.per.capita","Population"),
-                 list(Minimum = ~min(.,na.rm=TRUE), 
-                      Median = ~median(.,na.rm=TRUE), 
-                      Mean = ~mean(.,na.rm=TRUE))) %>%
-    mutate_if(is.numeric,two_decimal) %>% 
-    pivot_longer(!Country, names_sep ="_",
-                 names_to = c("Variable", ".value"))%>%
-   mutate(Variable=ifelse(Variable=="Average.annual.hours.worked",
-                          "Hours.worked",Variable))
-
-W1 <-ggplot(data,mapping = aes(x = Year,y=GDP.per.capita,
-                           color=Country,group=Country)) +
-  geom_line() +
-  labs(y ="GDP per capita", 
-       caption = "Source: World Bank data base")+
-    theme_bw()
-
-W2 <-ggplot(data,mapping = aes(x = Year,y=Average.annual.hours.worked,
-                           color=Country,group=Country)) +
-  geom_line() +
-  labs(y ="Average annual hours worked", 
-       caption = "Source: World Bank data base")+
-    theme_bw()
-
-W3 <- data %>%
-    filter(Country=="United States")%>%
-    ggplot(mapping = aes(x = Average.annual.hours.worked,
-                          y=GDP.per.capita))+
-    geom_point() + 
-    stat_smooth(method=lm)+
-  labs(x ="Average annual hours worked", 
-       y ="GDP per capita", 
-       caption = "Source: World Bank data base")+
-    theme_bw()
+    summarise(avg_avh = mean(avh),
+              avg_gdp = mean(gdp)) %>%
+  kable(col.names = c("Country", 
+                      "Average of the Average Annual Working Hours (hours)", 
+                      "Average of GDP per capita (USD)"), 
+        digits = 2,
+        align = "lcr",
+        caption = "The Comparation of Average Annual Working Hours and GDP between Australia and Indonesia") %>%
+  kable_styling(full_width = F, 
+                bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
-
-## Interested Country: China and The United States
-
-<br>
-<br>
---
-**Q1: How do the Average annual hours worked relates to the GDP between China and The United States
-<br>
-<br>
---
-**Q2: What is the trend of GDP between China and The United States
+.content-box-duke-green[ 
+ ** Less working hours resulted in higher GDP **
+]
 
 ---
 
-## Descriptive statistical analysis of China and The United States
-
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
-datatable(overall)
-
-```
-
+# Conclusion
 
 
 
 ---
-
-## GDP per capita between China and The United States.
-
-```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
-knitr::include_graphics("figs/Rplot.png")
-```
-
----
-## Average annual work hours between China and The United States.
-
-```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
-knitr::include_graphics("figs/Rplot01.png")
-```
-
----
-## The relation between Average annual hours worked and GDP per capita in The United States
-```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
-knitr::include_graphics("figs/Rplot02.png")
-```
----
-## The relation between Average annual hours worked and GDP per capita in China
-```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
-knitr::include_graphics("figs/Rplot03.png")
-```
-
-
----
-class: center, top
-
-# INDIA AND UNITED KINGDOM
-
-.content-box-soft[For **India and United Kingdom**, GDP and Annual working hours data from 1970 to 2017, lets calculate average of GDP and Working hours from 1970 to 2017]
-
-
-
-```{r echo=FALSE, message=FALSE}
-Ind_UK_Data <- Analysis_Data %>%
-    filter(Entity %in% c("India", "United Kingdom") & Year >= 1970 & Year <= 2017) %>%
-    rename(Country = "Entity",
-           Avg_Annual_Working_Hours = "Average annual hours worked by persons engaged (avh) (PWT 9.1 (2019))", 
-           GDP = "Output-side real GDP per capita (gdppc_o) (PWT 9.1 (2019))", 
-           Population = "Population (historical estimates)")
-
-Avg_GDP_WH <- Ind_UK_Data %>%
-    group_by(Country) %>%
-    summarise(avg_GDP = mean(GDP), avg_working_hrs = mean(Avg_Annual_Working_Hours))
-
-kable(Avg_GDP_WH, caption = "Average GDP and Working hours of India and United Kingdrom from 1970 to 2017", align = "c") %>%
-    kable_classic_2(full_width = F)
-    
-
-
-```
-
-.content-box-duke-green[From the table on the previous slide, we see that despite India has more average working hours than United Kingdom, the average vale of GDP of United Kingdom is very high than India which means, for India and United Kingdom, GDP does not depend on Working hours solely, there are other factors as well.]
-
----
-class: center, top
-
-.content-box-soft[To understand this, let's create a figure and see the trend in GDP and average working hours in India and United Kingdom.]
-
-```{r echo=FALSE, message=FALSE}
-p1 <- ggplot(Ind_UK_Data, aes(x = Year, 
-                        y = Avg_Annual_Working_Hours,
-                        color = Country)) + geom_line() +
-    ylab("Avg Work Hrs (Annual)") + labs(title = "Avg Work Hrs of India and UK from 1970 to 2017") + theme_bw()
-
-
-
-p2 <- ggplot(Ind_UK_Data, aes(x = Year, 
-                        y = GDP,
-                        color = Country)) + geom_line() + 
-    labs(title = "GDP each year of India and UK from 1970 to 2017") + theme_bw()
-
-
-gridExtra::grid.arrange(p1,p2, nrow=2)
-
-```
-
----
-
-class: center, top
-
-.content-box-soft[From the above plots, it is clear that in India, the Average working hours and GDP both are increasing but not as compared to UK. On the other hand, in UK, Average working hours are decreasing continuously while GDP is going up. Therefore, GDP does not solely depend on working hours. In India, the population has increased to a great extent and in UK, the increase has not been that much, therefore this huge increase in population might have been the reason for India's falling short in GDP growth.]
----
-
-
 
 
 
