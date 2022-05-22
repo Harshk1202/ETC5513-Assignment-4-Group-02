@@ -233,7 +233,7 @@ gridExtra::grid.arrange(p1,p2, nrow=2)
 
 class: center, middle
 
-.content-box-soft[From the above plots, it is clear that in India, the Average working hours and GDP both are increasing but not as compared to UK. On the other hand, in UK, Average working hours are decreasing continuously while GDP is going up. Therefore, GDP does not solely depend on working hours. In India, the population has increased to a great extent and in UK, the increase has not been that much, therefore this huge increase in population might have been the reason for India's falling short in GDP growth.]
+.content-box-soft[From the above plots, it is clear that in India, the Average working hours and GDP both are increasing but not as compared to UK. On the other hand, in UK, Average working hours are decreasing continuously while GDP is going up. Therefore, GDP does not solely depend on working hours or we can say that, in richer country, UK, people work for lesser number of hours as compared to India with low GDP. In India, the population has increased to a great extent and in UK, the increase has not been that much, therefore this huge increase in population might be another reason for India's falling short in GDP growth.]
 
 
 ---
@@ -421,7 +421,7 @@ au_idn %>%
 
 # Conclusion
 
-For this study, we took 8 countries ( China, USA, India, UK, France, Mexico, Australia & Indonesia) and analysed their respective GDP growth with respect to Hours of Work which each person does on an average in one year. After the analyzation, we found that GDP growth does not solely depend on Working hours and there can be many factors for this like population, how efficiently people are working and what are the resources available for people in rich countries with the help of which they are able to complete more work in less number of hours.  
+For this study, we took 8 countries ( China, USA, India, UK, France, Mexico, Australia & Indonesia) and analysed their respective GDP growth with respect to Hours of Work which each person does on an average in one year. After the analyzation, we found that GDP growth does not solely depend on Working hours and also, people in richer countries work for lesser number of hours. There can be many factors for this like population and how efficiently people are working and what are the resources available for people in rich countries with the help of which they are able to complete more work in less number of hours.  
 
 
 
