@@ -136,8 +136,8 @@ W3 <- data %>%
 
 ## Descriptive statistical analysis of China and The United States
 
-```{r, echo = FALSE, message = FALSE, warning = FALSE, out.width = '50%', out.height= '50%'}
-datatable(overall)
+```{r,echo = FALSE, warning = FALSE, message = FALSE, fig.align="center",out.width = '80%'}
+knitr::include_graphics("figs/Rplot04.png")
 ```
 
 ---
