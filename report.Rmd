@@ -5,6 +5,7 @@ date: '2022-05-24'
 output:
   xaringan::moon_reader:
     lib_dir: libs
+    css: css/style.css
     yolo: FALSE
 ---
 
@@ -24,7 +25,6 @@ library(scales)
 options(scipen = 200)
 Analysis_Data <- read_csv(here::here("Data/Assignment_data.csv"))
 ```
----
 
 class: left, top
 
@@ -33,13 +33,13 @@ class: left, top
 
 1. Introduction (Repo Structure & Research Question)
 
-2. Section 1 (China & US)
+2. China & US
 
-3. Section 2 (India & UK)
+3. India & UK
 
-4. Section 3 (France & Mexico)
+4. France & Mexico
 
-5. Section 4 (Australia & Indonesia)
+5. Australia & Indonesia
 
 6. Conclusion
 
@@ -52,7 +52,7 @@ class: center, middle
 ---
 class: center, top
 # Repo Stucture
-```{r out.width = '80%', echo = FALSE, fig.align="center"}
+```{r out.width = '80%', echo = FALSE, fig.align="center", eval=FALSE}
 knitr::include_graphics("figs/ ... .jpeg")
 ```
 
@@ -121,26 +121,23 @@ W3 <- data %>%
     theme_bw()
 ```
 
----
-
-## Interested Country: China and The United States
+## China and The United States
 
 <br>
 <br>
---
+
 **Q1: How do the Average annual hours worked relates to the GDP between China and The United States
 <br>
 <br>
---
+
 **Q2: What is the trend of GDP between China and The United States
 
 ---
 
 ## Descriptive statistical analysis of China and The United States
 
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
+```{r, echo = FALSE, message = FALSE, warning = FALSE, out.width = '50%', out.height= '50%'}
 datatable(overall)
-
 ```
 
 ---
@@ -193,8 +190,9 @@ kable(Avg_GDP_WH, caption = "Average GDP and Working hours of India and United K
     kable_classic_2(full_width = F)
 ```
 
-
-.content-box-duke-green[From the table on the previous slide, we see that despite India has more average working hours than United Kingdom, the average vale of GDP of United Kingdom is very high than India which means, for India and United Kingdom, GDP does not depend on Working hours solely, there are other factors as well.]
+---
+.content-box-duke-green[From the table on the previous slide, we see that despite India has more average working hours than United Kingdom, the average vale of GDP of United Kingdom is very high than India which means, for India and United Kingdom, GDP does not depend on Working hours solely, there are other factors as well.
+]
 
 ---
 class: center, top
@@ -228,7 +226,7 @@ class: center, top
 
 ---
 class: center, middle
-# Section Three
+
 # France & Mexico
 
 ---
@@ -267,7 +265,9 @@ sec3_figure <- sec3_data %>%
   facet_wrap(~type, scales = "free_y")
 ```
 
-- The left part figure shows that the average annual hours worked by persons are guadually decreased in both of two countries from the year of 1970 to 2017. 
+
+
+- The left part figure shows that the average annual hours worked by persons are gradually decreased in both of two countries from the year of 1970 to 2017. 
 
 - The right part figure indicates that the overall trend of the output-side real GDP per capita  shows a continuous rise in the same period.
 
@@ -280,7 +280,7 @@ ggplot(sec3_data) +
                   color = Country)) 
 ```
 
-- The Figure \@ref(fig:relationship) shows that the per capita working hours in France and Mexico show a declining trend as GDP increases.
+- The figure above shows that the per capita working hours in France and Mexico show a declining trend as GDP increases.
 
 ---
 class: left, middle
@@ -312,8 +312,7 @@ kable(sec3_table, booktabs = TRUE, caption = "The Comparation of Average Working
 
 class: center, middle
 
-# Section 4
-## Australia & Indonesia
+# Australia & Indonesia
 
 .pull-left[
 
@@ -335,7 +334,7 @@ source : [https://flaglane.com/](https://flaglane.com/)
 
 class: left, top
 
-### Section 4 Australia & Indonesia
+### Australia & Indonesia
 
 ```{r au_idn, echo=FALSE}
 au_idn <- Analysis_Data %>%
@@ -384,7 +383,7 @@ au_idn %>%
 ---
 class: left, top
 
-### Section 4 Australia & Indonesia
+### Australia & Indonesia
 
 ```{r avg_avh_gdp, echo=FALSE}
 au_idn %>% 
